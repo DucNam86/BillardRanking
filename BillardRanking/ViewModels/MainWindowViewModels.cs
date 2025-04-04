@@ -111,7 +111,25 @@ namespace BillardRanking.ViewModels
                 }
                 else
                 {
-                    return;
+                    int count = 0;
+                    foreach (var p in Players)
+                    {
+                        if (p.TemporaryWins > 0)
+                        {
+                            await _apiService.AddWinAsync(p.Name, p.TemporaryWins);
+                            count++;
+                        }
+                    }
+                    if (count == 0)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        LoadPlayers();
+                        return;
+                    }
+
                 }
             }
             player.Wins = player.TemporaryWins;
