@@ -1,0 +1,6 @@
+@BillardAPI_HostAddress = http://localhost:5160
+
+GET {{BillardAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

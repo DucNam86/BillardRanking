@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillardRanking", "BillardRanking\BillardRanking.csproj", "{0820CCF7-788B-4A44-B11C-9343E992980F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillardAPI", "BillardAPI\BillardAPI.csproj", "{0E1508CE-5299-4533-9366-9C8DAA4BE634}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0820CCF7-788B-4A44-B11C-9343E992980F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0820CCF7-788B-4A44-B11C-9343E992980F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0820CCF7-788B-4A44-B11C-9343E992980F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0820CCF7-788B-4A44-B11C-9343E992980F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1508CE-5299-4533-9366-9C8DAA4BE634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1508CE-5299-4533-9366-9C8DAA4BE634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1508CE-5299-4533-9366-9C8DAA4BE634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1508CE-5299-4533-9366-9C8DAA4BE634}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D274776C-3358-4E68-A6C9-BCA488AB7B33}
+	EndGlobalSection
+EndGlobal
