@@ -3,6 +3,8 @@ using BillardAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace BillardAPI.Controllers
 {
@@ -22,7 +24,16 @@ namespace BillardAPI.Controllers
         {
             return _playerService.GetPlayers();
         }
-
+        [HttpGet("name")]
+        public ActionResult<Player> GetUserData(string playerName)
+        {
+            var player = _playerService.GetPlayerByName(playerName);
+            if (player == null)
+            {
+                return NotFound();
+            }
+            return Ok(player);
+        }
         [HttpPost("AddWins")]
         public IActionResult AddWin([FromBody] Player request)
         {
@@ -64,5 +75,6 @@ namespace BillardAPI.Controllers
             await _playerService.ResetPlayerWinsAsync(playerName);
             return Ok();
         }
+ 
     }
 }

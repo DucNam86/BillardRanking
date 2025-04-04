@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BillardRanking.Views;
+using System;
 using System.Windows;
 
 namespace BillardRanking
@@ -13,5 +9,25 @@ namespace BillardRanking
     /// </summary>
     public partial class App : Application
     {
+
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            if (IsFirstTimeLogin())
+            {
+                var nameWindow = new NameInputDialog(); 
+                nameWindow.ShowDialog(); 
+            }
+
+            var mainWindow = new MainWindow(); 
+            mainWindow.Show();
+        }
+
+        public bool IsFirstTimeLogin()
+        {
+            return string.IsNullOrEmpty(BillardRanking.Properties.Settings.Default.UserName);
+        }
     }
 }

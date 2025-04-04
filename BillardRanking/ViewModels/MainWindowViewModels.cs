@@ -21,16 +21,6 @@ namespace BillardRanking.ViewModels
         private readonly ApiService _apiService = new ApiService();
         public ObservableCollection<Player> Players { get; set; } = new ObservableCollection<Player>();
         public ObservableCollection<Monthly> GroupedStatistics { get; set; } = new ObservableCollection<Monthly>();
-        private Player _selectedPlayer;
-        public Player SelectedPlayer
-        {
-            get => _selectedPlayer;
-            set
-            {
-                _selectedPlayer = value;
-                OnPropertyChanged(nameof(SelectedPlayer));
-            }
-        }
 
         #endregion
 
@@ -57,8 +47,8 @@ namespace BillardRanking.ViewModels
         {
             var players = await _apiService.GetPlayersAsync();
             var grouped = players
-                   .Where(p => p.CreatedDate != DateTime.MinValue) 
-                   .GroupBy(p => p.CreatedDate.ToString("yyyy-MM")) 
+                   .Where(p => p.CreatedDate != DateTime.MinValue)
+                   .GroupBy(p => p.CreatedDate.ToString("yyyy-MM"))
                    .OrderByDescending(g => g.Key); Players.Clear();
             GroupedStatistics.Clear();
 
@@ -105,36 +95,25 @@ namespace BillardRanking.ViewModels
         {
             if (player == null)
             {
-                if (_selectedPlayer != null)
+                int count = 0;
+                foreach (var p in Players)
                 {
-                    player = _selectedPlayer;
+                    if (p.TemporaryWins > 0)
+                    {
+                        await _apiService.AddWinAsync(p.Name, p.TemporaryWins);
+                        count++;
+                    }
+                }
+                if (count == 0)
+                {
+                    return;
                 }
                 else
                 {
-                    int count = 0;
-                    foreach (var p in Players)
-                    {
-                        if (p.TemporaryWins > 0)
-                        {
-                            await _apiService.AddWinAsync(p.Name, p.TemporaryWins);
-                            count++;
-                        }
-                    }
-                    if (count == 0)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        LoadPlayers();
-                        return;
-                    }
-
+                    LoadPlayers();
+                    return;
                 }
             }
-            player.Wins = player.TemporaryWins;
-            await _apiService.AddWinAsync(player.Name, player.Wins);
-            LoadPlayers();
         }
     }
 }

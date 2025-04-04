@@ -51,5 +51,13 @@ namespace BillardAPI.Service
                 await _context.SaveChangesAsync();
             }
         }
+        public Player GetPlayerByName(string name)
+        {
+            return _context.Players
+                           .Where(p => p.Name.ToLower() == name.ToLower())
+                           .FirstOrDefault();
+        }
+
+
     }
 }

@@ -18,8 +18,7 @@
             <ColumnDefinition Width="1000"/>
             <ColumnDefinition Width="410"/>
         </Grid.ColumnDefinitions>
-        <ListView BorderBrush="AliceBlue" BorderThickness="1" Grid.Column="0" Width="980" ItemsSource="{Binding Players}" HorizontalAlignment="Left" Margin="10,10,10,0" Grid.Row="0" FontSize="20"
-                  SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}">
+        <ListView BorderBrush="AliceBlue" BorderThickness="1" Grid.Column="0" Width="980" ItemsSource="{Binding Players}" HorizontalAlignment="Left" Margin="10,10,10,0" Grid.Row="0" FontSize="20">
 
             <!--Style-->
             <ListView.Background>
@@ -32,12 +31,12 @@
                     <Setter Property="FontWeight" Value="Bold"/>
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Blue"/>
+                            <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="Pink"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="DarkBlue"/>
+                            <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="Pink"/>
                         </Trigger>
                     </Style.Triggers>
@@ -72,7 +71,7 @@
                                         <ColumnDefinition Width="150"/>
                                     </Grid.ColumnDefinitions>
                                     <Border Background="Aquamarine" CornerRadius="4" Margin="5" Grid.Column="0">
-                                        <TextBox BorderBrush="Transparent" FontSize="24" Background="Transparent" Text="{Binding TemporaryWins, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox IsEnabled="{Binding IsCurrentUser}" BorderBrush="Transparent" FontSize="24" Background="Transparent" Text="{Binding TemporaryWins, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </Border>
                                     <Border Grid.Column="1" Background="Red" Margin="10" CornerRadius="8">
                                         <Button Content="Reset Điểm" Command="{Binding DataContext.ResetWinsCommand, RelativeSource={RelativeSource AncestorType=Window}}"

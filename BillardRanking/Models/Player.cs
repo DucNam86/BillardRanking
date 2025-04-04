@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BillardRanking.FeService;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BillardRanking.Models
 {
     public class Player
     {
+        private readonly ApiService _apiService = new ApiService();
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -32,5 +34,6 @@ namespace BillardRanking.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public bool IsCurrentUser => Name == new ApiService().GetSavedUserName();
     }
 }
