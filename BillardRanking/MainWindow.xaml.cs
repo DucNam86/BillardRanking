@@ -16,20 +16,20 @@ namespace BillardRanking
         {
             InitializeComponent();
             DataContext = new MainWindowViewModels();
-            if (_userService.IsFirstTimeLogin())
-            {
-                var nameDialog = new NameInputDialog();
-                if (nameDialog.ShowDialog() == true)
-                {
-                    _userService.SaveUserName(nameDialog.Name);
-                }
-                else
-                {
-                    Close();
-                }
-            }
+            //if (_userService.IsFirstTimeLogin())
+            //{
+            //    var nameDialog = new NameInputDialog();
+            //    if (nameDialog.ShowDialog() == true)
+            //    {
+            //        _userService.SaveUserName(nameDialog.Name);
+            //    }
+            //    else
+            //    {
+            //        Close();
+            //    }
+            //}
 
-            LoadUserData();
+            //LoadUserData();
         }
         private async void LoadUserData()
         {
