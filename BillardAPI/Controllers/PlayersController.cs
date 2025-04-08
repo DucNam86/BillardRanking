@@ -24,7 +24,7 @@ namespace BillardAPI.Controllers
         {
             return _playerService.GetPlayers();
         }
-        [HttpGet("name")]
+        [HttpGet("{playerName}")]
         public ActionResult<Player> GetUserData(string playerName)
         {
             var player = _playerService.GetPlayerByName(playerName);

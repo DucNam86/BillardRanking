@@ -14,14 +14,16 @@ namespace BillardRanking
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            //BillardRanking.Properties.Settings.Default.UserName = string.Empty;
+            //BillardRanking.Properties.Settings.Default.Save();
 
             if (IsFirstTimeLogin())
             {
-                var nameWindow = new NameInputDialog(); 
-                nameWindow.ShowDialog(); 
+                var nameWindow = new NameInputDialog();
+                nameWindow.ShowDialog();
             }
 
-            var mainWindow = new MainWindow(); 
+            var mainWindow = new MainWindow();
             mainWindow.Show();
         }
 

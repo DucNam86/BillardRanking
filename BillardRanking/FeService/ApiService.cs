@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text;
+using System;
 
 namespace BillardRanking.FeService
 {
@@ -19,7 +20,7 @@ namespace BillardRanking.FeService
         }
         public async Task <Player> GetPlayerAsync(string playerName)
         {
-            return await _httpClient.GetFromJsonAsync<Player>("name");
+            return await _httpClient.GetFromJsonAsync<Player>($"{playerName}");
         }
 
         public async Task AddWinAsync(string name, int win)
