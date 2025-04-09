@@ -5,11 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BillardRanking.Views"
         mc:Ignorable="d"
-        Title="Nhập Tên" Height="450" Width="800">
-    <Grid>
-        <StackPanel Margin="20">
-            <TextBox Name="txtUserName" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Button Content="Xác nhận" Click="Confirm_Click"/>
+        Title="Nhập Tên" Height="300" Width="400" WindowStartupLocation="CenterScreen"
+        Background="Black" ResizeMode="NoResize" WindowStyle="None">
+
+    <Border CornerRadius="15" Padding="20" Margin="10" Effect="{DynamicResource DropShadowEffect}">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/signIn.jpg"/>
+        </Border.Background>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+            <TextBlock Text="Vui lòng nhập tên của bạn" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Margin="0 5 0 40"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+
+            <TextBox Name="txtUserName"
+                     Width="250"
+                     Height="35"
+                     Padding="5"
+                     FontSize="16"
+                     Background="#f7f7f7"
+                     BorderBrush="#ccc"
+                     BorderThickness="1"
+                     
+                     HorizontalAlignment="Center"/>
+
+            <Button Content="Xác nhận"
+                    Click="Confirm_Click"
+                    Width="120"
+                    Height="35"
+                    Margin="0 20 0 0"
+                    FontSize="16"
+                    Background="#605DEC"
+                    Foreground="White"
+                    BorderBrush="#605DEC"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#605DEC"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#4B44D4"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <TextBlock Text="Note: Chỉ nhập tên và chữ cái đầu viết hoa" 
+             FontSize="15" 
+             FontWeight="ExtraLight" 
+             Margin="0 5 0 40"
+             HorizontalAlignment="Center"
+             Foreground="White"/>
         </StackPanel>
-    </Grid>
+    </Border>
+
+    <Window.Resources>
+        <DropShadowEffect x:Key="DropShadowEffect" Color="#888" ShadowDepth="5" Opacity="0.3" BlurRadius="15"/>
+    </Window.Resources>
 </Window>

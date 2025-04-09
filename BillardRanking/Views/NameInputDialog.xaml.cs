@@ -18,8 +18,10 @@ namespace BillardRanking.Views
             var userName = txtUserName.Text;
             Properties.Settings.Default["UserName"] = userName;
             Properties.Settings.Default.Save();
-
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
+           
         }
     }
 }

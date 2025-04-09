@@ -45,15 +45,5 @@ namespace BillardRanking.FeService
             return Properties.Settings.Default[UserNameKey]?.ToString();
         }
 
-        public void SaveUserName(string userName)
-        {
-            Properties.Settings.Default[UserNameKey] = userName;
-            Properties.Settings.Default.Save();
-        }
-
-        public bool IsFirstTimeLogin()
-        {
-            return string.IsNullOrEmpty(GetSavedUserName());
-        }
     }
 }

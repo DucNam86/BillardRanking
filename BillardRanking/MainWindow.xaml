@@ -74,7 +74,7 @@
                                         <TextBox IsEnabled="{Binding IsCurrentUser}" BorderBrush="Transparent" FontSize="24" Background="Transparent" Text="{Binding TemporaryWins, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </Border>
                                     <Border Grid.Column="1" Background="Red" Margin="10" CornerRadius="8">
-                                        <Button Content="Reset Điểm" Command="{Binding DataContext.ResetWinsCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        <Button IsEnabled="{Binding IsCurrentUser}" Content="Reset Điểm" Command="{Binding DataContext.ResetWinsCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                            CommandParameter="{Binding Name}" Padding="10" FontSize="14" FontWeight="Bold">
                                             <Button.Style>
                                                 <Style TargetType="Button">
