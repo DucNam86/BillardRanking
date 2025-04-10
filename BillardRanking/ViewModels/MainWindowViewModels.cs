@@ -34,13 +34,17 @@ namespace BillardRanking.ViewModels
         #region command
         public ICommand SaveWinCommand { get; }
         public ICommand ResetWinsCommand { get; }
+        public ICommand IncreaseBallDieCommand { get; }
+        public ICommand ReduceBallDieCommand { get; }
         #endregion
 
         public MainWindowViewModels()
         {
             SaveWinCommand = new RelayCommand<Player>(async (player) => await AddWin(player));
             ResetWinsCommand = new RelayCommand<string>(async (playerName) => await ResetPlayerWins(playerName));
-            LoadPlayers();
+            IncreaseBallDieCommand = new RelayCommand<Player>(async (player) => await IncreaseBallDie(player));
+            ReduceBallDieCommand = new RelayCommand<Player>(async (player) => await ReduceBallDie(player));
+        LoadPlayers();
         }
 
         private async void LoadPlayers()
@@ -83,6 +87,31 @@ namespace BillardRanking.ViewModels
                     Players = new ObservableCollection<Player>(sortedPlayers)
                 });
             }
+        }
+        private async Task IncreaseBallDie(Player player)
+        {
+            if (player == null) return;
+
+            player.ballDie++;
+            await _apiService.AddBallAsync(new Player
+            {
+                Name = player.Name,
+                ballDie = 1
+            });
+            LoadPlayers();
+
+        }
+        private async Task ReduceBallDie(Player player)
+        {
+            if (player == null) return;
+
+            player.ballDie--;
+            await _apiService.AddBallAsync(new Player
+            {
+                Name = player.Name,
+                ballDie = -1
+            });
+            LoadPlayers();
         }
         private async Task ResetPlayerWins(string playerName)
         {

@@ -22,6 +22,16 @@ namespace BillardAPI.Service
                 player.Wins += win;
                 _context.SaveChanges();
             }
+        }       
+        public bool UpdateBall(string playerName, int ball)
+        {
+            var player = _context.Players.FirstOrDefault(p => p.Name == playerName);
+            if (player == null)
+                return false;
+
+            player.ballDie = Math.Max(0, player.ballDie + ball);
+            _context.SaveChanges();
+            return true;
         }
         public async Task<Player> CreatePlayerAsync(Player player)
         {

@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace BillardRanking.Models
 {
-    public class Player
+    public class Player : INotifyPropertyChanged
     {
         private readonly ApiService _apiService = new ApiService();
 
         public int Id { get; set; }
+        public int ballDie { get; set; } = 0;
         public string Name { get; set; }
         public int Wins { get; set; }
         public int Rank { get; set; }

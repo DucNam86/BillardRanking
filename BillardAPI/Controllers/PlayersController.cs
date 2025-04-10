@@ -39,6 +39,12 @@ namespace BillardAPI.Controllers
         {
             _playerService.UpdateWin(request.Name, request.Wins);
             return Ok();
+        }      
+        [HttpPost("AddBalls")]
+        public IActionResult AddBall([FromBody] Player request)
+        {
+            var result = _playerService.UpdateBall(request.Name, request.ballDie);
+            return result ? Ok() : NotFound();
         }
         [HttpPost("Create")]
         public async Task<IActionResult> CreatePlayer([FromBody] Player player)

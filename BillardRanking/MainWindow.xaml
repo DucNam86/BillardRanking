@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BillardRanking"
+        xmlns:vc="clr-namespace:BillardRanking.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="auto" Width="auto">
+    <Window.Resources>
+        <vc:BallDieToPointsConverter x:Key="BallDieToPointsConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Images/billiards.jpg"/>
@@ -100,6 +104,16 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </Button.Style>
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}" 
+                                                           CornerRadius="2"
+                                                           BorderThickness="{TemplateBinding BorderThickness}" 
+                                                           BorderBrush="{TemplateBinding BorderBrush}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
                                         </Button>
                                     </Border>
 
@@ -107,6 +121,91 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
+                    <GridViewColumn Width="180" Header="Ball Die">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0">
+                                    <TextBlock Text="{Binding ballDie}" 
+                                      Foreground="Orange" 
+                                      FontWeight="Bold" 
+                                      FontSize="20" 
+                                      VerticalAlignment="Center" 
+                                      Margin="0,0,10,0"/>
+                                    <Button Content="+1"
+                                      Padding="5,2" Width="30"   Margin="0,0,5,0"
+                                      FontSize="20"
+                                      Command="{Binding DataContext.IncreaseBallDieCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                      CommandParameter="{Binding}">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                                  CornerRadius="2"
+                                                  BorderThickness="{TemplateBinding BorderThickness}" 
+                                                  BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="DarkGreen"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="FontWeight" Value="Bold"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="Green"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>   
+                                    <Button Margin="10,0,0,0" Content="-1" 
+                                      Padding="5,2" Width="30"
+                                      FontSize="20" 
+                                      Command="{Binding DataContext.ReduceBallDieCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                      CommandParameter="{Binding}">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}" 
+                                                   CornerRadius="2"
+                                                   BorderThickness="{TemplateBinding BorderThickness}" 
+                                                   BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="DarkRed"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="FontWeight" Value="Bold"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="Red"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Total Money" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ballDie, Converter={StaticResource BallDieToPointsConverter}}"
+                                  Foreground="Gold" FontWeight="Bold" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>
@@ -118,8 +217,33 @@
                 </Grid.Background>
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <StackPanel Margin="10">
-                        <TextBlock FontWeight="DemiBold" Foreground="LightGray" Text="Note: Hãy nhấn vào tên rồi mới chỉnh sửa điểm!"/>
-                        <TextBlock FontWeight="DemiBold" Foreground="LightGray" Text="Warning: Sau khi sửa hãy nhấn 'Lưu'" Margin="0,5,0,10"/>
+                        <Grid Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="DemiBold" Foreground="Red" Text="Warning: Sau khi sửa hãy nhấn 'Lưu'" Margin="0,0,0,0"/>
+                            <Border Grid.Column="1" Margin="70,-10,0,-20">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="pack://application:,,,/Images/cup.png"/>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                        <GroupBox BorderThickness="0.5" Foreground="AliceBlue" Header="Giải thưởng" Margin="0,10,0,0">
+                            <StackPanel>
+                                <TextBlock Margin="5" Foreground="LightGreen" Text="🥇 Hạng 1: 1 Chuyến đi biển"/>
+                                <TextBlock Margin="5,0,5,5" Foreground="Red" Text="🥈 Hạng 2 + 3 + ...: Mất Tiền"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox BorderThickness="0.5" Foreground="AliceBlue" Header="Luật chơi" Margin="0,10,0,0">
+                            <StackPanel>
+                                <TextBlock Text="• Mỗi ván thắng: +1 điểm"/>
+                                <TextBlock Text="• Mỗi bi chết: +1 điểm Ball Die"/>
+                                <TextBlock Text="• Mỗi điểm Ball Die = 5k"/>
+                                <TextBlock Text="• Cuối tháng tổng kết theo hạng"/>
+                            </StackPanel>
+                        </GroupBox>
                         <TextBlock FontSize="15" FontWeight="Bold" Foreground="White" Text="Thống kê chi tiết các tháng" Margin="0,5,0,10"/>
 
                         <ItemsControl ItemsSource="{Binding GroupedStatistics}">
@@ -151,6 +275,13 @@
                                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                                                 <DataGridTextColumn Header="Wins" Binding="{Binding Wins}" Width="*"/>
                                                 <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="*"/>
+                                                <DataGridTemplateColumn Header="Ball Die" Width="*">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding ballDie}" Foreground="Red" FontWeight="Bold"/>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
                                             </DataGrid.Columns>
                                             <DataGrid.Style>
                                                 <Style TargetType="DataGrid">
@@ -174,6 +305,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                  
                     </StackPanel>
                 </ScrollViewer>
             </Grid>

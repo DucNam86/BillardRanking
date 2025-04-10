@@ -12,12 +12,19 @@ namespace BillardRanking.FeService
     public class ApiService
     {
         private const string UserNameKey = "UserName";
-        private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new System.Uri("https://192.168.1.203:5000/api/Players/") };
+        private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new System.Uri("https://wren-still-elephant.ngrok-free.app/api/Players/") };
 
         public async Task<List<Player>> GetPlayersAsync()
         {
             return await _httpClient.GetFromJsonAsync<List<Player>>("");
         }
+
+        public async Task AddBallAsync(Player player)
+        {
+            var response = await _httpClient.PostAsJsonAsync("AddBalls", player);
+            response.EnsureSuccessStatusCode();
+        }
+
         public async Task <Player> GetPlayerAsync(string playerName)
         {
             return await _httpClient.GetFromJsonAsync<Player>($"{playerName}");
