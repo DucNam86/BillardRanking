@@ -12,7 +12,7 @@ namespace BillardRanking.FeService
     public class ApiService
     {
         private const string UserNameKey = "UserName";
-        private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new System.Uri("https://localhost:7162/api/Players/") };
+        private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new System.Uri("https://192.168.1.203:5000/api/Players/") };
 
         public async Task<List<Player>> GetPlayersAsync()
         {
