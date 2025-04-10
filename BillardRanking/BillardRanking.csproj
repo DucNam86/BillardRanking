@@ -166,5 +166,8 @@
   <ItemGroup>
     <Resource Include="Images\tooltip_on.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Dockerfile" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
