@@ -12,7 +12,7 @@ namespace BillardRanking.FeService
     public class ApiService
     {
         private const string UserNameKey = "UserName";
-        private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new System.Uri("https://wren-still-elephant.ngrok-free.app/api/Players/") };
+        private readonly HttpClient _httpClient = new HttpClient { BaseAddress = new System.Uri("http://localhost:5160/api/Players/") };
 
         public async Task<List<Player>> GetPlayersAsync()
         {
@@ -25,7 +25,7 @@ namespace BillardRanking.FeService
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task <Player> GetPlayerAsync(string playerName)
+        public async Task<Player> GetPlayerAsync(string playerName)
         {
             return await _httpClient.GetFromJsonAsync<Player>($"{playerName}");
         }
@@ -38,11 +38,17 @@ namespace BillardRanking.FeService
         }
         public async Task AddPlayer(Player player)
         {
-            await _httpClient.PostAsync($"Create", null);
+            var response = await _httpClient.PostAsJsonAsync("Create", player);
+            response.EnsureSuccessStatusCode();
         }
         public async Task ResetWinsAsync(string playerName)
         {
             var response = await _httpClient.PostAsJsonAsync($"resetWins", playerName);
+            response.EnsureSuccessStatusCode();
+        }
+        public async Task RemovePlayerAsync(string playerName)
+        {
+            var response = await _httpClient.DeleteAsync($"delete?name={Uri.EscapeDataString(playerName)}");
             response.EnsureSuccessStatusCode();
         }
 

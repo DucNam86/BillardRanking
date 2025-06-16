@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Xml.Linq;
 
 namespace BillardRanking.Views
 {
@@ -7,7 +8,6 @@ namespace BillardRanking.Views
     /// </summary>
     public partial class NameInputDialog : Window
     {
-        public string Name { get; private set; }
 
         public NameInputDialog()
         {

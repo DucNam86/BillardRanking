@@ -21,7 +21,7 @@
                        HorizontalAlignment="Center"
                        Foreground="White"/>
 
-            <TextBox Name="txtUserName"
+            <TextBox x:Name="txtUserName"
                      Width="250"
                      Height="35"
                      Padding="5"

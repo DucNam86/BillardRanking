@@ -130,10 +130,17 @@
     <Compile Include="FeService\ApiService.cs" />
     <Compile Include="Models\Monthly.cs" />
     <Compile Include="ViewModels\MainWindowViewModels.cs" />
+    <Compile Include="Views\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NameInputDialog.xaml.cs">
       <DependentUpon>NameInputDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
